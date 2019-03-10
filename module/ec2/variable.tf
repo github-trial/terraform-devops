@@ -27,7 +27,7 @@ variable "instance-type" {
 }
 
 variable "key" {
-  default = "SSHRDP"
+  default = "ssh"
 }
 
 variable "vpc_id" {
@@ -39,11 +39,11 @@ variable "vpc_security_group_ids" {
 }
 
 variable "PATH_TO_PRIVATE_KEY" {
-  default = "mykey"
+  default = "./ssh.pem"
 }
 
 variable "PATH_TO_PUBLIC_KEY" {
-  default = "mykey.pub"
+  default = "./ssh.pem"
 }
 
 variable "INSTANCE_USERNAME" {
