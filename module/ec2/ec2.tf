@@ -15,15 +15,15 @@ provisioner "file" {
   destination = "/tmp/install.sh"
 }
 
-#connection {
-#    type ="ssh"
-#    user = "${var.INSTANCE_USERNAME}"
-#    host        = "${element(aws_eip.assign.*.public_ip, 0)}"
-#    #private_key = "${"file("${var.PATH_TO_PRIVATE_KEY}")"}
-#    #private_key = "${file("${var.PATH_TO_PRIVATE_KEY}")}"
-#    private_key = "${file(var.PATH_TO_PRIVATE_KEY)}"
-#    timeout  = "1m" 
-#}
+connection {
+    type ="ssh"
+    user = "${var.INSTANCE_USERNAME}"
+    host        = "${element(aws_eip.assign.*.public_ip, 0)}"
+    #private_key = "${"file("${var.PATH_TO_PRIVATE_KEY}")"}
+    #private_key = "${file("${var.PATH_TO_PRIVATE_KEY}")}"
+    private_key = "${file(var.PATH_TO_PRIVATE_KEY)}"
+    timeout  = "1m" 
+}
 
 provisioner "remote-exec" {
   inline = [
@@ -57,4 +57,15 @@ resource "aws_volume_attachment" "ebs-volume-add-attachment" {
   device_name = "/dev/xvdh"
   volume_id = "${aws_ebs_volume.ebs-volume-add.id}"
   instance_id = "${aws_instance.ec2_vm.id}"
+}
+
+output "instance-id" {
+value = "${aws_instance.ec2_vm.id}"
+}
+
+output "eip" {
+value = "${aws_eip.assign.public_ip}"
+}
+output "vol-id" {
+value = "${aws_ebs_volume.ebs-volume-add.id}"
 }
