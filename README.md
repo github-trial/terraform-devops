@@ -4,8 +4,8 @@
 
 1. Tree Strcture..
 
-terraform-devops
-|__main.tf
+terraform-devops <br />
+|__main.tf <br />
 |__variable.tf
 |__module/
 |  |__vpc/
