@@ -5,22 +5,22 @@
 1. Tree Strcture..
 
 terraform-devops <br />
-|__ main.tf <br />
-|__ variable.tf <br />
-|__ module/ <br />
-|   |__ vpc/ <br />
-|   |   |__vpc.tf <br />
-|   |   |__variable.tf <br />
-|   |__ sg/ <br />
-|   |   |__sg.tf <br />
-|   |   |__variable.tf <br />
-|   |__ ec2/ <br />
-|   |   |__ec2.tf <br />
-|   |   |__variable.tf <br />
-|__ provisioner/ <br />
-|   |__ install.sh <br />
-|__ output.tf
-|__ README.md <br />
+|------   main.tf <br />
+|------   variable.tf <br />
+|------   module/ <br />
+|      |------   vpc/ <br />
+|      |      |------   vpc.tf <br />
+|      |      |------   variable.tf <br />
+|      |------    sg/ <br />
+|      |      |------   sg.tf <br />
+|      |      |------   variable.tf <br />
+|      |------    ec2/ <br />
+|      |      |------   ec2.tf <br />
+|      |      |------   variable.tf <br />
+|------   provisioner/ <br />
+|      |      |------   install.sh <br />
+|------   output.tf <br />
+|------   README.md <br />
 
 Module VPC:   <br />
 module vpc creates the complete network and outputs the vale of created resources.  <br />
