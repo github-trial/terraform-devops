@@ -25,9 +25,9 @@ output "instance-id-mod" {
 value = "${module.ec2.instance-id}"
 }
 
-#output "eip" {
-#value = "${module.ec2.eip}"
-#}
+output "eip" {
+value = "${module.ec2.eip}"
+}
 
 output "vol-id" {
 value = "${module.ec2.vol-id}"
