@@ -11,17 +11,15 @@ resource "aws_instance" "ec2_vm" {
   }
 
 provisioner "file" {
-  source = "./provisioner/install.sh"
+  source = "../../provisioner/install.sh"
   destination = "/tmp/install.sh"
 }
 
 connection {
     type ="ssh"
     user = "${var.INSTANCE_USERNAME}"
-    host        = "${element(aws_eip.assign.*.public_ip, 0)}"
-    #private_key = "${"file("${var.PATH_TO_PRIVATE_KEY}")"}
-    #private_key = "${file("${var.PATH_TO_PRIVATE_KEY}")}"
-    private_key = "${file(var.PATH_TO_PRIVATE_KEY)}"
+    private_key = "${var.key}"
+    agent = true
     timeout  = "1m" 
 }
 
@@ -33,16 +31,16 @@ provisioner "remote-exec" {
  }
 }
 
-##create and allocate eip....
-resource "aws_eip" "assign" {
-  vpc = true
-}
-
-resource "aws_eip_association" "eip_assoc" {
-  instance_id   = "${aws_instance.ec2_vm.id}"
-  allocation_id = "${aws_eip.assign.id}"
-}
-
+###create and allocate eip....
+#resource "aws_eip" "assign" {
+#  vpc = true
+#}
+#
+#resource "aws_eip_association" "eip_assoc" {
+#  instance_id   = "${aws_instance.ec2_vm.id}"
+#  allocation_id = "${aws_eip.assign.id}"
+#}
+#
 ##ebs volume....
 resource "aws_ebs_volume" "ebs-volume-add" {
     availability_zone = "eu-west-1a"
@@ -63,9 +61,9 @@ output "instance-id" {
 value = "${aws_instance.ec2_vm.id}"
 }
 
-output "eip" {
-value = "${aws_eip.assign.public_ip}"
-}
+#output "eip" {
+#value = "${aws_eip.assign.public_ip}"
+#}
 output "vol-id" {
 value = "${aws_ebs_volume.ebs-volume-add.id}"
 }

@@ -27,4 +27,5 @@ module "ec2" {
   subnet_id = "${module.vpc.sub-id}"
   vpc_id = "${module.vpc.vpc_id}"
   vpc_security_group_ids = ["${module.sg.sg-id}"]
+  key = "${file(var.key)}" 
 }
