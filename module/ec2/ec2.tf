@@ -1,8 +1,13 @@
 ##creating ec2 VM
+resource "aws_key_pair" "github_trial" {
+  key_name = "github-trial"
+  public_key = "${file("/Users/greg/.ssh/id_rsa.pub")}"
+}
+
 resource "aws_instance" "ec2_vm" {
   ami = "${lookup(var.AMIS, var.AWS_REGION)}"
   instance_type = "t2.micro"
-  key_name = "${var.key}"
+  key_name = "${aws_key_pair.github_trial.key_name}"
   vpc_security_group_ids = ["${var.vpc_security_group_ids}"]
   subnet_id    = "${var.subnet_id}"
   associate_public_ip_address = "true"
